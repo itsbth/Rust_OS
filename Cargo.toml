@@ -5,3 +5,6 @@ authors = ["Bjørn Tore Paulsen <dev@itsbth.com>"]
 
 [lib]
 crate-type = ["staticlib"]
+
+[dependencies]
+rlibc = "*"
