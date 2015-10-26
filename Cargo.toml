@@ -1,0 +1,7 @@
+[package]
+name = "rust_os"
+version = "0.0.1"
+authors = ["Bjørn Tore Paulsen <dev@itsbth.com>"]
+
+[lib]
+crate-type = ["staticlib"]
