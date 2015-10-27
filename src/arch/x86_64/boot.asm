@@ -19,8 +19,6 @@ start:
 
   jmp gdt64.code:long_mode_start
 
-  ;; Print OK
-  mov dword [0xb8000], 0x2f4b2f4f
   hlt
 
 error:
@@ -93,6 +91,7 @@ enable_paging:
   mov eax, cr0
   or eax, 1 << 31
   or eax, 1 << 16
+  xchg bx, bx
   mov cr0, eax
 
   ret

@@ -44,6 +44,12 @@ fn decode_bcd(bcd: u8) -> u8 {
     ((bcd & 0xF0) >> 1) + ((bcd & 0xF0) >> 3) + (bcd & 0xF)
 }
 
+unsafe fn rdrand() -> u64 {
+    let mut ret: u64;
+    asm!("rdrand $0" : "=r"(ret));
+    ret
+}
+
 #[no_mangle]
 pub extern fn rust_main() {
     use core::fmt::Write;
@@ -51,6 +57,7 @@ pub extern fn rust_main() {
     vga_buffer::WRITER.lock().write_str("Hello, World!\n");
     println!("Some numbers: {} {}", 42, 13.37);
     println!("KBSTATP: {}", unsafe {inb(0x64)});
+    // println!("Rand: {}", unsafe{rdrand()});
     unsafe { outb(0x0B, 0b11); }
     let mut old_sec = 0;
     let mut last_tsc = 0;
